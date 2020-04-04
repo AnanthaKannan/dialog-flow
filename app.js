@@ -22,3 +22,6 @@ app.post('/dialog_flow', async(req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
+
+
+    // "start": "GOOGLE_APPLICATION_CREDENTIALS=./bikeshopsample-ca7f0-fa609d83ca06.json node app.js",
