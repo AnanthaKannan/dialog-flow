@@ -1,5 +1,9 @@
 const express = require("express");
+const cors = require('cors')
+
 const app = express();
+app.use(cors())
+
 const { dialog_flow } = require('./dialog_flow')
 const port = process.env.PORT || 3000;
 app.use(express.json());
