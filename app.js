@@ -5,14 +5,13 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get('/', function (req, res) {
-    res.send('Hello World')
+    res.send('Sucessfully wroking..')
 });
 
 app.post('/dialog_flow', async(req, res) => {
     const { text } = req.body;
-    dialog_flow(text).then((result) =>{
-        result.status = 200
-        return res.status(200).json(result)
+    dialog_flow(text).then((data) =>{
+        return res.status(200).json({status:200, data:data})
     })
     .catch((error) =>{
         return res.status(400).json({status:400, error:error})

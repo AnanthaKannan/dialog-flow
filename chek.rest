@@ -1,10 +1,11 @@
 @url = http://localhost:3000
+# @url = https://pure-atoll-47649.herokuapp.com
 ###
 POST {{url}}/dialog_flow
 Content-Type: application/json
 
 {
-    "text":"hi"
+    "text":"sdfsdfsdf"
 }
 
 ### 
