@@ -5,7 +5,7 @@ const app = express();
 app.use(cors())
 
 const { dialog_flow } = require('./dialog_flow')
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.use(express.json());
 
 app.get('/', function (req, res) {
@@ -21,6 +21,20 @@ app.post('/dialog_flow', async(req, res) => {
         return res.status(400).json({status:400, error:error})
     })
 })
+
+app.post('/isUserValid', async(req, res) => {
+    const { empId } = req.body;
+    const empIds = [64, 54];
+    const index = empIds.findIndex(id => id == empId);
+    console.log('index', index);
+    if(index >= 0 )
+        return res.status(200).json({status:200, data:{status:true}})
+    else
+    return res.status(200).json({status:200, data:{status:false}})
+
+})
+
+
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
