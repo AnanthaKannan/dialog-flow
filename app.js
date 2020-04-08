@@ -24,7 +24,7 @@ app.post('/dialog_flow', async(req, res) => {
 
 app.post('/isUserValid', async(req, res) => {
     const { empId } = req.body;
-    const empIds = [64, 54];
+    const empIds = [64, 65, 66, 67];
     const index = empIds.findIndex(id => id == empId);
     console.log('index', index);
     if(index >= 0 )

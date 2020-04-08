@@ -1,11 +1,11 @@
-@url = http://localhost:4000
-# @url = https://pure-atoll-47649.herokuapp.com
+# @url = http://localhost:4000
+@url = https://pure-atoll-47649.herokuapp.com
 ###
 POST {{url}}/dialog_flow
 Content-Type: application/json
 
 {
-    "text":"sdfsdfsdf"
+    "text":"hi"
 }
 
 ### 
@@ -13,5 +13,5 @@ POST {{url}}/isUserValid
 Content-Type: application/json
 
 {
-    "empId": 64
+    "empId": 44
 }
