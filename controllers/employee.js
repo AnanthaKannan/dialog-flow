@@ -8,3 +8,9 @@ exports.isUserValid = async(req, res) => {
     else
     return res.status(200).json({status:200, data:{status:false}})
 }
+
+exports.employeeByName = async(name) =>{
+    // const name = "kannan"
+    const data = await Employe.find({ name: { $regex: new RegExp(name, 'i')  } });
+    return data._doc;
+ }

@@ -1,5 +1,5 @@
 const empdata = [{
-	"name" : "Anantha Kannan",
+	"name" : "Sree Anantha Kannan",
 	"age" : "28",
 	"email" : "sree.kannan@rapidqube.com",
 	"reporting" : "Umashankar Somasekar",
