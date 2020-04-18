@@ -15,3 +15,19 @@ Content-Type: application/json
 {
     "empId": 61
 }
+
+###
+POST {{url}}/webhook
+Content-Type: application/json
+
+{
+    "queryResult":{
+        "intent":{
+            "displayName":"employee-details"
+        },
+        "parameters": {
+      "empId": 64,
+      "name": "Manoj"
+    }
+    }
+}

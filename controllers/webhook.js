@@ -18,14 +18,39 @@ exports.webhook = async(req, res) => {
         console.log('name', name);
         const result = await employee.employeeByName(name);
         console.log('result', result)
-        resText = JSON.stringify(result);
-        const responseObj = {
-            "fulfillmentText": resText,
-            "fulfillmentMessages":[{"text": { "text":[resText] } }],
-            "source":""
+        if(result.length == 1) {
+            const responseObj = {
+                "fulfillmentText": resText,
+                "fulfillmentMessages":[result[0]],
+                "source":""
+            }
+            return res.json(responseObj);
         }
-        console.log('responseObj', responseObj)
-        return res.json(responseObj);
+        else if(result.length > 1){
+            const quesAns = result.map((obj) =>{
+                console.log(obj._id)
+                const dataname = obj._doc.name;
+                return {question: dataname, response:dataname }
+            });
+            console.log("quesAns", quesAns)
+            const responseObj = {
+                "fulfillmentText": "Matched with multiple name",
+                "fulfillmentMessages":[{"text": { "text":quesAns } }],
+                "source":""
+            }
+            return res.json(responseObj);
+        }
+        else{
+            const respon = 'Your name not matched. Please try with another name.'
+            const responseObj = {
+                "fulfillmentText": respon,
+                "fulfillmentMessages":[{"text": { "text":[respon] } }],
+                "source":""
+            }
+            console.log('responseObj', responseObj)
+            return res.json(responseObj);
+        }
+     
     }
     
     else if( intent == 'empId' || intent == 'doj' || intent == 'current-job' ||
