@@ -16,7 +16,7 @@ exports.webhook = async(req, res) => {
     if(intent == 'employee-details'){
         const { name } = parameters;
         console.log('name', name);
-        const result = employee.employeeByName(name);
+        const result = await employee.employeeByName(name);
         console.log('result', result)
         resText = JSON.stringify(result);
         const responseObj = {
