@@ -41,7 +41,7 @@ exports.webhook = async(req, res) => {
             const quesAns = result.map((obj) =>{
                 console.log(obj._id)
                 const dataname = obj._doc.name;
-                return {question: dataname, response:dataname }
+                return {text: dataname, postback:dataname }
             });
             console.log("quesAns", quesAns)
             const responseObj = {
