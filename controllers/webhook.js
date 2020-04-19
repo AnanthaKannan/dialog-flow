@@ -20,7 +20,7 @@ exports.webhook = async(req, res) => {
         console.log('result', result)
         if(result.length == 1) {
             const cardData = result[0]
-            console.log('cardData', cardData);
+            console.log('nameOfmine', cardData.name);
             const responseObj = {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
@@ -32,19 +32,21 @@ exports.webhook = async(req, res) => {
                       }
                     },
                     {
-                      "payload": {
-                        "messages": [
-                          {
-                            "text": "Insert Random Text Here",
-                            "name":'kannan',
-                            "dynaic": cardData.name
+                        "payload": {
+                          "google": {
+                            "expectUserResponse": true,
+                            "richResponse": {
+                              "items": [
+                                {
+                                  "simpleResponse": {
+                                    "textToSpeech": "this is a Google Assistant response"
+                                  }
+                                }
+                              ]
+                            }
                           }
-                        ],
-                        "redirect_to_blocks": [
-                          "Welcome message"
-                        ]
+                        }
                       }
-                    }
                   ],
                 "source":""
             }
