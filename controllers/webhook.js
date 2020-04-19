@@ -25,34 +25,25 @@ exports.webhook = async(req, res) => {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
-                      "card": {
-                        "title": cardData.name,
-                        "name": "myname is here",
-                        "phone":"23423423",
-                        "subtitle": "card text",
-                        "imageUri": "https://example.com/images/example.png",
-                        "buttons": [
+                      "text": {
+                        "text": [
+                          ""
+                        ]
+                      }
+                    },
+                    {
+                      "payload": {
+                        "messages": [
                           {
-                            "text": "button text",
-                            "postback": "https://example.com/path/for/end-user/to/follow"
+                            "text": "Insert Random Text Here",
+                            "name":'kannan',
+                            "dynaic": cardData.name
                           }
                         ],
+                        "redirect_to_blocks": [
+                          "Welcome message"
+                        ]
                       }
-                    }
-                  ],
-                "messages": [
-                    {
-                      "buttons": [
-                        {
-                          "postback": "Card Link URL or text",
-                          "text": "Card Link Title"
-                        }
-                      ],
-                      "imageUrl": "http://urltoimage.com",
-                      "platform": "facebook",
-                      "subtitle": "Card Subtitle",
-                      "title": "Card Title",
-                      "type": 1
                     }
                   ],
                 "source":""
