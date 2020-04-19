@@ -49,9 +49,9 @@ exports.webhook = async(req, res) => {
                 "fulfillmentMessages": [
                     {
                         "card": {
-                          "title": "",
-                          "subtitle": "",
-                          "imageUri": "",
+                          "title": "title",
+                          "subtitle": "subtitle",
+                          "imageUri": "imageUri",
                           "buttons": [quesAns]
                         }
                       }
