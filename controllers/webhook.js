@@ -19,12 +19,14 @@ exports.webhook = async(req, res) => {
         const result = await employee.employeeByName(name);
         console.log('result', result)
         if(result.length == 1) {
+            const cardData = result[0]
             const responseObj = {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
                       "card": {
-                        "title": "card title",
+                        "title": cardData.name,
+                        "name":cardData.name,
                         "subtitle": "card text",
                         "imageUri": "https://example.com/images/example.png",
                         "buttons": [
@@ -33,7 +35,6 @@ exports.webhook = async(req, res) => {
                             "postback": "https://example.com/path/for/end-user/to/follow"
                           }
                         ],
-                        ...result
                       }
                     }
                   ],
