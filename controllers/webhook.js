@@ -20,13 +20,15 @@ exports.webhook = async(req, res) => {
         console.log('result', result)
         if(result.length == 1) {
             const cardData = result[0]
+            console.log('cardData', cardData);
             const responseObj = {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
                       "card": {
                         "title": cardData.name,
-                        "name":cardData.name,
+                        "name": "myname is here",
+                        "phone":"23423423",
                         "subtitle": "card text",
                         "imageUri": "https://example.com/images/example.png",
                         "buttons": [
