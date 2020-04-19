@@ -21,7 +21,21 @@ exports.webhook = async(req, res) => {
         if(result.length == 1) {
             const responseObj = {
                 "fulfillmentText": resText,
-                "fulfillmentMessages":[result[0]],
+                "fulfillmentMessages": [
+                    {
+                      "card": {
+                        "title": "card title",
+                        "subtitle": "card text",
+                        "imageUri": "https://example.com/images/example.png",
+                        "buttons": [
+                          {
+                            "text": "button text",
+                            "postback": "https://example.com/path/for/end-user/to/follow"
+                          }
+                        ]
+                      }
+                    }
+                  ],
                 "messages": [
                     {
                       "buttons": [
