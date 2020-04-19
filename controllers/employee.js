@@ -13,6 +13,5 @@ exports.employeeByName = async(name) =>{
     // const name = "kannan"
     console.log('myname', name)
     const data = await Employe.find({ name: { $regex: new RegExp(name, 'i')  } });
-    console.log(data)
     return data;
  }

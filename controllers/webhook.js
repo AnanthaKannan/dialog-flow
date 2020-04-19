@@ -19,32 +19,17 @@ exports.webhook = async(req, res) => {
         const result = await employee.employeeByName(name);
         console.log('result', result)
         if(result.length == 1) {
-            const cardData = result[0]
-            console.log('nameOfmine', cardData.name);
+            const cardData = result[0]._doc;
+            console.log('nameOfmine', cardData);
             const responseObj = {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
-                      "text": {
-                        "text": [
-                          ""
-                        ]
-                      }
-                    },
-                    {
-                        "payload": {
-                          "google": {
-                            "expectUserResponse": true,
-                            "richResponse": {
-                              "items": [
-                                {
-                                  "simpleResponse": {
-                                    "textToSpeech": "this is a Google Assistant response"
-                                  }
-                                }
-                              ]
-                            }
-                          }
+                        "card": {
+                          "title": "",
+                          "subtitle": JSON.stringify(cardData),
+                          "imageUri": "",
+                          "buttons": []
                         }
                       }
                   ],
@@ -60,8 +45,17 @@ exports.webhook = async(req, res) => {
             });
             console.log("quesAns", quesAns)
             const responseObj = {
-                "fulfillmentText": "Matched with multiple name",
-                "fulfillmentMessages":[{"text": { "text":quesAns } }],
+                "fulfillmentText": resText,
+                "fulfillmentMessages": [
+                    {
+                        "card": {
+                          "title": "",
+                          "subtitle": "",
+                          "imageUri": "",
+                          "buttons": [quesAns]
+                        }
+                      }
+                  ],
                 "source":""
             }
             return res.json(responseObj);
