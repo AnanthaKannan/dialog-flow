@@ -25,7 +25,9 @@ return new Promise( async (resolve, reject) =>{
   // Send request and log result
   try{
   const responses = await sessionClient.detectIntent(request);
+  console.log('response', responses)
   const result = responses[0].queryResult;
+  console.log(result)
   // console.log(result)
   // console.log('Detected intent', result);
 //   console.log(`  Query: ${result.queryText}`);

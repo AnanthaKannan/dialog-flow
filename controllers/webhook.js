@@ -22,6 +22,21 @@ exports.webhook = async(req, res) => {
             const responseObj = {
                 "fulfillmentText": resText,
                 "fulfillmentMessages":[result[0]],
+                "messages": [
+                    {
+                      "buttons": [
+                        {
+                          "postback": "Card Link URL or text",
+                          "text": "Card Link Title"
+                        }
+                      ],
+                      "imageUrl": "http://urltoimage.com",
+                      "platform": "facebook",
+                      "subtitle": "Card Subtitle",
+                      "title": "Card Title",
+                      "type": 1
+                    }
+                  ],
                 "source":""
             }
             return res.json(responseObj);
