@@ -5,7 +5,7 @@ POST {{url}}/dialog_flow
 Content-Type: application/json
 
 {
-    "text":"my empid is 64"
+    "text":"who is kannan"
 }
 
 ### 

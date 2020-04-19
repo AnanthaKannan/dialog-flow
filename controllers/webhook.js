@@ -32,7 +32,8 @@ exports.webhook = async(req, res) => {
                             "text": "button text",
                             "postback": "https://example.com/path/for/end-user/to/follow"
                           }
-                        ]
+                        ],
+                        ...result
                       }
                     }
                   ],
