@@ -26,6 +26,7 @@ exports.webhook = async(req, res) => {
                 "fulfillmentMessages": [
                     {
                         "payload": {
+                          "message": "card",
                           "title_a": cardData.name,
                           "title_b": cardData.email,
                           "title_c": cardData.phone,
@@ -48,11 +49,9 @@ exports.webhook = async(req, res) => {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
-                        "card": {
-                          "title": "title",
-                          "subtitle": "subtitle",
-                          "imageUri": "imageUri",
-                          "buttons": [quesAns]
+                        "payload": {
+                          "message": "quickresponse",
+                          "data": quesAns
                         }
                       }
                   ],
