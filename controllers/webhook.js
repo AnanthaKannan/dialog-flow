@@ -25,11 +25,11 @@ exports.webhook = async(req, res) => {
                 "fulfillmentText": resText,
                 "fulfillmentMessages": [
                     {
-                        "card": {
-                          "title": "",
-                          "subtitle": JSON.stringify(cardData),
-                          "imageUri": "",
-                          "buttons": []
+                        "payload": {
+                          "title_a": cardData.name,
+                          "title_b": cardData.email,
+                          "title_c": cardData.phone,
+                          "title_d": cardData.position
                         }
                       }
                   ],
