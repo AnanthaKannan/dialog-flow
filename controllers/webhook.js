@@ -30,7 +30,8 @@ exports.webhook = async(req, res) => {
                           "title_a": cardData.name,
                           "title_b": cardData.email,
                           "title_c": cardData.phone,
-                          "title_d": cardData.position
+                          "title_d": cardData.position,
+                          "imgurl": cardData.profilepic
                         }
                       }
                   ],

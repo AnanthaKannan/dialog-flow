@@ -50,6 +50,7 @@ return new Promise( async (resolve, reject) =>{
           title_b: payload.title_b.stringValue,
           title_c: payload.title_c.stringValue,
           title_d: payload.title_d.stringValue,
+          imgurl: payload.imgurl.stringValue
         };
         console.log(card)
       }
