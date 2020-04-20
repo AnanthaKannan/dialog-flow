@@ -25,10 +25,14 @@ return new Promise( async (resolve, reject) =>{
   // Send request and log result
   try{
   const responses = await sessionClient.detectIntent(request);
-  console.log('response', responses)
-  resolve(responses)
+
   const result = responses[0].queryResult;
-  console.log(result)
+  result._id = responses[0].responseId;
+  console.log('response', result)
+
+  // const fulfillmentMessages = result
+  // console.log(result)
+  // resolve(result)
   // console.log(result)
   // console.log('Detected intent', result);
 //   console.log(`  Query: ${result.queryText}`);
