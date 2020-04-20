@@ -60,7 +60,7 @@ exports.webhook = async(req, res) => {
             return res.json(responseObj);
         }
         else{
-            const respon = 'Your name not matched. Please try with another name.'
+            const respon = `${name} not matched with this organization. Please try with another name.`
             const responseObj = {
                 "fulfillmentText": respon,
                 "fulfillmentMessages":[{"text": { "text":[respon] } }],

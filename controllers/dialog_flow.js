@@ -1,3 +1,4 @@
+// @ts-check
 const dialogflow = require('dialogflow');
 const projectId = 'bikeshopsample-ca7f0'
 
@@ -28,28 +29,51 @@ return new Promise( async (resolve, reject) =>{
 
   const result = responses[0].queryResult;
   result._id = responses[0].responseId;
+  const fulfillmentMessages = result.fulfillmentMessages[0];
   console.log('response', result)
 
-  // const fulfillmentMessages = result
-  // console.log(result)
-  // resolve(result)
-  // console.log(result)
-  // console.log('Detected intent', result);
-//   console.log(`  Query: ${result.queryText}`);
-//   console.log(`  Response: ${result.fulfillmentText}`);
-  if (result.intent) {
+
+
+  if (!result.intent) {
+    console.log(`No intent matched.`);
+    reject('No intent matched')
+  }
+    const message = fulfillmentMessages.message;
+    let card, quickresponse;
+    if(message == 'payload'){
+      const payload = fulfillmentMessages.payload.fields;
+      const payloadMessage = payload.message.stringValue;
+      console.log(payloadMessage);
+      if(payloadMessage == 'card'){
+         card = {
+          title_a: payload.title_a.stringValue,
+          title_b: payload.title_b.stringValue,
+          title_c: payload.title_c.stringValue,
+          title_d: payload.title_d.stringValue,
+        };
+        console.log(card)
+      }
+      else if(payloadMessage == 'quickresponse'){
+        const listResponse = payload.data.listValue.values;
+        quickresponse = quickresponse = listResponse.map(obj => {
+          const text = obj.structValue.fields.text.stringValue;
+          return {  text, callback: `who is ${text}` }
+        });
+        console.log(quickresponse)
+      }
+    }
+
     console.log(`  Intent: ${result.intent.displayName}`);
     const res = {
         query:result.queryText,
         response:result.fulfillmentText,
-        intent:result.intent.displayName
+        intent:result.intent.displayName,
+        card,
+        quickresponse
     }
     resolve(res)
-  } else {
-    console.log(`No intent matched.`);
-    reject('No intent matched')
+
   }
-}
 catch(error){
     console.log(error)
     reject('Oops something went wrong')
