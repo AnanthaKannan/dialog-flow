@@ -5,7 +5,7 @@ POST {{url}}/dialog_flow
 Content-Type: application/json
 
 {
-    "text":"my empid is 64"
+    "text":"who is manoj Villa"
 }
 
 ### 
@@ -13,7 +13,7 @@ POST {{url}}/isUserValid
 Content-Type: application/json
 
 {
-    "empId": 61
+    "empId": "64"
 }
 
 ###
@@ -27,7 +27,7 @@ Content-Type: application/json
         },
         "parameters": {
       "empId": 64,
-      "name": "Manoj"
+      "name": "kannan"
     }
     }
 }

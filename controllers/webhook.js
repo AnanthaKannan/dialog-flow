@@ -19,9 +19,22 @@ exports.webhook = async(req, res) => {
         const result = await employee.employeeByName(name);
         console.log('result', result)
         if(result.length == 1) {
+            const cardData = result[0]._doc;
+            console.log('nameOfmine', cardData);
             const responseObj = {
                 "fulfillmentText": resText,
-                "fulfillmentMessages":[result[0]],
+                "fulfillmentMessages": [
+                    {
+                        "payload": {
+                          "message": "card",
+                          "title_a": cardData.name,
+                          "title_b": cardData.email,
+                          "title_c": cardData.phone,
+                          "title_d": cardData.position,
+                          "imgurl": cardData.profilepic
+                        }
+                      }
+                  ],
                 "source":""
             }
             return res.json(responseObj);
@@ -30,18 +43,25 @@ exports.webhook = async(req, res) => {
             const quesAns = result.map((obj) =>{
                 console.log(obj._id)
                 const dataname = obj._doc.name;
-                return {question: dataname, response:dataname }
+                return {text: dataname, postback:dataname }
             });
             console.log("quesAns", quesAns)
             const responseObj = {
-                "fulfillmentText": "Matched with multiple name",
-                "fulfillmentMessages":[{"text": { "text":quesAns } }],
+                "fulfillmentText": resText,
+                "fulfillmentMessages": [
+                    {
+                        "payload": {
+                          "message": "quickresponse",
+                          "data": quesAns
+                        }
+                      }
+                  ],
                 "source":""
             }
             return res.json(responseObj);
         }
         else{
-            const respon = 'Your name not matched. Please try with another name.'
+            const respon = `${name} not matched with this organization. Please try with another name.`
             const responseObj = {
                 "fulfillmentText": respon,
                 "fulfillmentMessages":[{"text": { "text":[respon] } }],
