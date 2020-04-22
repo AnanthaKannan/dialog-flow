@@ -38,7 +38,7 @@ exports.webhook = async(req, res) => {
                         "card": {
                           "title":  cardData.email,
                           "subtitle": cardData.phone,
-                          "imageUri": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                          "imageUri": cardData.profilepic
                         },
                         "platform": "SLACK"
                       }
@@ -51,7 +51,7 @@ exports.webhook = async(req, res) => {
             const quesAns = result.map((obj) =>{
                 console.log(obj._id)
                 const dataname = obj._doc.name;
-                return {text: dataname, postback:dataname }
+                return dataname
             });
             console.log("quesAns", quesAns)
             const responseObj = {
@@ -62,6 +62,12 @@ exports.webhook = async(req, res) => {
                           "message": "quickresponse",
                           "data": quesAns
                         }
+                      },{
+                        "quickReplies": {
+                          "title": "Please select any one",
+                          "quickReplies":quesAns
+                        },
+                        "platform": "SLACK"
                       }
                   ],
                 "source":""
