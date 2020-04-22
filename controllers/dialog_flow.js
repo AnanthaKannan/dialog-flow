@@ -1,6 +1,6 @@
 // @ts-check
 const dialogflow = require('dialogflow');
-const projectId = 'bikeshopsample-ca7f0'
+const projectId = 'hr-bot-agbkvh'
 
 module.exports.dialog_flow = (text) =>{
 return new Promise( async (resolve, reject) =>{

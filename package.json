@@ -5,7 +5,7 @@
   "main": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "GOOGLE_APPLICATION_CREDENTIALS=./bikeshopsample.json node app.js"
+    "start": "GOOGLE_APPLICATION_CREDENTIALS=./hr-bot-google-auth.json node app.js"
   },
   "keywords": [],
   "author": "",
