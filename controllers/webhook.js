@@ -33,6 +33,14 @@ exports.webhook = async(req, res) => {
                           "title_d": cardData.position,
                           "imgurl": cardData.profilepic
                         }
+                      },
+                      {
+                        "card": {
+                          "title":  cardData.email,
+                          "subtitle": cardData.phone,
+                          "imageUri": "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                        },
+                        "platform": "SLACK"
                       }
                   ],
                 "source":""
