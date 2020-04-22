@@ -11,9 +11,84 @@ exports.webhook = async(req, res) => {
     const parameters = queryResult.parameters;
     console.log('intent', intent)
     let resText = null;
+    
+    if(intent == 'designation'){
+        const { designation } = parameters;
+        const result = await employee.employeeByDesignation(designation);
+        if(result.length == 1) {
+            const cardData = result[0]._doc;
+            console.log('nameOfmine', cardData);
+            const responseObj = {
+                "fulfillmentText": resText,
+                "fulfillmentMessages": [
+                    {
+                        "payload": {
+                          "message": "card",
+                          "title_a": cardData.name,
+                          "title_b": cardData.email,
+                          "title_c": cardData.phone,
+                          "title_d": cardData.position,
+                          "imgurl": cardData.profilepic
+                        }
+                      },
+                      {
+                        "card": {
+                          "title":  cardData.email,
+                          "subtitle": cardData.phone,
+                          "imageUri": cardData.profilepic
+                        },
+                        "platform": "SLACK"
+                      }
+                  ],
+                "source":""
+            }
+            return res.json(responseObj);
+        }
+        else if(result.length > 1){
+            const quesAns = result.map((obj) =>{
+                console.log(obj._id)
+                const dataname = obj._doc.name;
+                return dataname
+            });
+            const rapid = result.map((obj) =>{
+                console.log(obj._id)
+                const dataname = obj._doc.name;
+                return {text: dataname, postback:dataname }
+            });
+            console.log("quesAns", quesAns)
+            const responseObj = {
+                "fulfillmentText": resText,
+                "fulfillmentMessages": [
+                    {
+                        "payload": {
+                          "message": "quickresponse",
+                          "data": rapid
+                        }
+                      },{
+                        "quickReplies": {
+                          "title": "Please select any one",
+                          "quickReplies":quesAns
+                        },
+                        "platform": "SLACK"
+                      }
+                  ],
+                "source":""
+            }
+            return res.json(responseObj);
+        }
+        else{
+            const respon = `${designation} not matched with this organization. Please try with another designation.`
+            const responseObj = {
+                "fulfillmentText": respon,
+                "fulfillmentMessages":[{"text": { "text":[respon] } }],
+                "source":""
+            }
+            console.log('responseObj', responseObj)
+            return res.json(responseObj);
+        }
+    }
 
-
-    if(intent == 'employee-details'){
+    if(intent == 'employee-details' || intent == 'employee-name'){
         const { name } = parameters;
         console.log('name', name);
         const result = await employee.employeeByName(name);
@@ -53,6 +128,11 @@ exports.webhook = async(req, res) => {
                 const dataname = obj._doc.name;
                 return dataname
             });
+            const rapid = result.map((obj) =>{
+                console.log(obj._id)
+                const dataname = obj._doc.name;
+                return {text: dataname, postback:dataname }
+            });
             console.log("quesAns", quesAns)
             const responseObj = {
                 "fulfillmentText": resText,
@@ -60,7 +140,7 @@ exports.webhook = async(req, res) => {
                     {
                         "payload": {
                           "message": "quickresponse",
-                          "data": quesAns
+                          "data": rapid
                         }
                       },{
                         "quickReplies": {

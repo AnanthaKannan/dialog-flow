@@ -10,8 +10,13 @@ exports.isUserValid = async(req, res) => {
 }
 
 exports.employeeByName = async(name) =>{
-    // const name = "kannan"
     console.log('myname', name)
     const data = await Employe.find({ name: { $regex: new RegExp(name, 'i')  } });
+    return data;
+ }
+
+ exports.employeeByDesignation = async(designation) =>{
+    console.log('designation', designation)
+    const data = await Employe.find({ position: { $regex: new RegExp(designation, 'i')  } });
     return data;
  }
