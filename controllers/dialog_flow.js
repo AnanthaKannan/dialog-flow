@@ -58,7 +58,7 @@ return new Promise( async (resolve, reject) =>{
         const listResponse = payload.data.listValue.values;
         quickresponse = quickresponse = listResponse.map(obj => {
           const text = obj.structValue.fields.text.stringValue;
-          return {  text, callback: `who is ${text}` }
+          return {  text, callback: text }
         });
         console.log(quickresponse)
       }
